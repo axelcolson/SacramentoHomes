@@ -29,7 +29,7 @@ public class HomeHandler extends Thread {
 			Path p1 = Paths.get("Sacramentorealestatetransactions.csv"); // Opvragen van het pad van de csv file.
 			lines = Files.lines(p1); // Lines initialiseren
 			aol = lines.count(); // Aantal lijnen tellen.
-			hand.readFunctie(reader, aol, "Sacramentorealestatetransactions.csv", homeSet);
+			hand.readFunctie(aol, "Sacramentorealestatetransactions.csv", homeSet);
 			System.out.println("Huizen met een waarde groter dan 200 000");
 
 			Thread T200P = new Thread(new Runnable() {
@@ -77,8 +77,9 @@ public class HomeHandler extends Thread {
 		}
 	}
 
-	private void readFunctie(BufferedReader reader, long aantalloops, String bestand, HashSet<Homes> homes)
+	private void readFunctie(long aantalloops, String bestand, HashSet<Homes> homes)
 			throws IOException {
+		BufferedReader reader = null;
 		String[] home = new String[12]; // 12 items
 		try {
 			reader = new BufferedReader(new FileReader(bestand)); // Inlezen bestand
